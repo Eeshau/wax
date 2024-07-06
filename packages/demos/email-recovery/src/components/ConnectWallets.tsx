@@ -1,5 +1,6 @@
 import { Button } from "./Button";
-import walletIcon from "../assets/wallet.svg";
+// import walletIcon from "../assets/wallet.svg";
+import AccountBalanceWalletOutlinedIcon from '@mui/icons-material/AccountBalanceWalletOutlined';
 import { ConnectKitButton } from "connectkit";
 import { useAccount } from "wagmi";
 import { useContext } from "react";
@@ -26,7 +27,7 @@ const ConnectWallets = () => {
       <ConnectKitButton.Custom>
         {({ show }) => {
           return (
-            <Button onClick={show} endIcon={<img src={walletIcon} />}>
+            <Button onClick={show} endIcon={<AccountBalanceWalletOutlinedIcon/>}>
               Connect Safe
             </Button>
           );

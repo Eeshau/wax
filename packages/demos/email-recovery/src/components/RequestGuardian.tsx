@@ -4,31 +4,29 @@ import { Button } from "./Button";
 import { useAccount, useReadContract, useWriteContract } from "wagmi";
 import { abi as safeAbi } from "../abi/Safe.json";
 import { useAppContext } from "../context/AppContextHook";
-
 import { abi as recoveryPluginAbi } from "../abi/SafeZkEmailRecoveryPlugin.json";
 import { safeZkSafeZkEmailRecoveryPlugin } from "../../contracts.base-sepolia.json";
-import {
-  genAccountCode,
-  getRequestGuardianSubject,
-  templateIdx,
-} from "../utils/email";
+import { genAccountCode, getRequestGuardianSubject, templateIdx } from "../utils/email";
 import { readContract } from "wagmi/actions";
 import { config } from "../providers/config";
 import { pad } from "viem";
 import { relayer } from "../services/relayer";
 import { StepsContext } from "../App";
 import { STEPS } from "../constants";
+import { useTheme } from "@emotion/react";
+import { Box, Grid, Typography, Divider } from '@mui/material';
+import InputField from "./InputField";
 
 const RequestGuardian = () => {
+  const theme = useTheme();
+
   const { address } = useAccount();
   const { writeContractAsync } = useWriteContract();
 
-  const { guardianEmail, setGuardianEmail, accountCode, setAccountCode } =
-    useAppContext();
+  const { guardianEmail, setGuardianEmail, accountCode, setAccountCode } = useAppContext();
   const stepsContext = useContext(StepsContext);
 
   const [loading, setLoading] = useState(false);
-  // 0 = 2 week default delay, don't do for demo
   const [recoveryDelay, setRecoveryDelay] = useState(1);
 
   const isMobile = window.innerWidth < 768;
@@ -38,6 +36,7 @@ const RequestGuardian = () => {
     abi: safeAbi,
     functionName: "getOwners",
   });
+
   const firstSafeOwner = useMemo(() => {
     const safeOwners = safeOwnersData as string[];
     if (!safeOwners?.length) {
@@ -72,10 +71,7 @@ const RequestGuardian = () => {
         functionName: "computeEmailAuthAddress",
         args: [guardianSalt],
       });
-      // TODO Should this be something else?
-      const previousOwnerInLinkedList = pad("0x1", {
-        size: 20,
-      });
+      const previousOwnerInLinkedList = pad("0x1", { size: 20 });
   
       await writeContractAsync({
         abi: recoveryPluginAbi,
@@ -88,8 +84,6 @@ const RequestGuardian = () => {
           previousOwnerInLinkedList,
         ],
       });
-  
-      console.debug("recovery configured");
   
       const recoveryRouterAddr = (await readContract(config, {
         abi: recoveryPluginAbi,
@@ -107,27 +101,7 @@ const RequestGuardian = () => {
         subject
       );
 
-      console.debug('accept req id', requestId);
-  
-      // TODO Use polling instead
       stepsContext?.setStep(STEPS.REQUESTED_RECOVERIES);
-      // let checkGuardianAcceptanceInterval = null
-
-      // const checkGuardianAcceptance = async () => {
-      //   if (!requestId) {
-      //     throw new Error("missing guardian request id");
-      //   }
-      //   const resBody = await relayer.requestStatus(requestId);
-      //   console.debug("guardian req res body", resBody);
-      //   if(resBody?.is_success) {
-      //     stepsContext?.setStep(STEPS.REQUESTED_RECOVERIES);
-      //     checkGuardianAcceptanceInterval?.clearInterval()
-      //   }
-      // }
-      // checkGuardianAcceptanceInterval = setInterval(async () => {
-      //     const res = await checkGuardianAcceptance();
-      //     console.log(res)
-      // }, 5000);
     } catch (err) {
       console.error(err);
     } finally {
@@ -144,76 +118,57 @@ const RequestGuardian = () => {
   ]);
 
   return (
-    <div
-      style={{
-        maxWidth: isMobile ? "100%" : "50%",
-        width: "100%",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "flex-start",
-        gap: "2rem",
-      }}
-    >
-      <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-        Connected wallet:
-        <ConnectKitButton />
-      </div>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          gap: "1rem",
-          width: "100%",
-        }}
-      >
-        Guardian Details:
-        <div className="container">
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              gap: "2rem",
-              width: "100%",
-              alignItems: "flex-end",
-              flexWrap: "wrap",
-              justifyContent: "space-between",
-            }}
-          >
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                width: isMobile ? "90%" : "60%",
-              }}
-            >
-              <p>Guardian's Email</p>
-              <input
-                style={{ width: "100%" }}
-                type="email"
-                value={guardianEmail}
-                onChange={(e) => setGuardianEmail(e.target.value)}
-              />
-            </div>
-            <div>
-              <span>Recovery Delay (seconds)</span>
-              <input
-                style={{ width: "1.875rem", marginLeft: "1rem" }}
-                type="number"
-                min={1}
-                value={recoveryDelay}
-                onChange={(e) => setRecoveryDelay(e.target.value)}
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-      <div style={{ margin: "auto" }}>
+    <Box sx={{marginX: 'auto'}}>
+    <Typography variant='h2' sx={{paddingBottom:'80px', fontWeight:'bold', color: '#333741'}}>Set Up Guardian Details </Typography>
+    <Grid container spacing={3} sx={{ maxWidth: isMobile ? "100%" : "50%", width: "100%", marginX: 'auto' }}>
+
+      <Grid item xs={6} sx={{borderRight:'2px solid #EBEBEB', paddingRight: '30px'}}>
+        <Box display="flex" flexDirection="column" gap="1rem">
+          <Box display="flex" alignItems="center">
+            <Typography variant="body1">Recovery Delay (seconds)</Typography>
+            <input
+              style={{ width: "3rem", marginLeft: "1rem" }}
+              type="number"
+              min={1}
+              value={recoveryDelay}
+              onChange={(e) => setRecoveryDelay(Number(e.target.value))}
+            />
+          </Box>
+          <Box display="flex" flexDirection="column" gap="1rem" sx={{textAlign:'left'}}>
+            <Typography variant="body1">Connected wallet:</Typography>
+            <ConnectKitButton />
+          </Box>
+          <InputField
+            type="text"
+            value={guardianEmail}
+            onChange={(e) => setGuardianEmail(e.target.value)}
+            label="Add a Guardian Message"
+          />
+        </Box>
+      </Grid>
+
+      <Grid item xs={6} sx={{textAlign:'left'}}>
+        <Typography variant="h5" sx={{paddingBottom:'20px'}}>Guardian Details:</Typography>
+        <Box display="flex" flexDirection="column" gap="1rem">
+          {[1, 2, 3].map((index) => (
+            <InputField
+              key={index}
+              type="email"
+              value={guardianEmail}
+              onChange={(e) => setGuardianEmail(e.target.value)}
+              label={`Guardian's Email`}
+            />
+          ))}
+        </Box>
+      </Grid>
+      
+      <Grid item xs={12} display="flex" justifyContent="center">
         <Button loading={loading} onClick={configureRecoveryAndRequestGuardian}>
           Configure Recovery and Request Guardian
         </Button>
-      </div>
-    </div>
+      </Grid>
+    </Grid>
+    </Box>
   );
 };
 
