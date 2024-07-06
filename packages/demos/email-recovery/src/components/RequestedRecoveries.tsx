@@ -15,6 +15,8 @@ import { safeZkSafeZkEmailRecoveryPlugin } from "../../contracts.base-sepolia.js
 import { StepsContext } from "../App";
 import { STEPS } from "../constants";
 
+import InputField from "./InputField";
+
 const BUTTON_STATES = {
   TRIGGER_RECOVERY: "Trigger Recovery",
   CANCEL_RECOVERY: "Cancel Recovery",
@@ -73,28 +75,6 @@ const RequestedRecoveries = () => {
 
     setLoading(false);
     setButtonState(BUTTON_STATES.COMPLETE_RECOVERY);
-
-    // let checkRequestRecoveryStatusInterval = null
-
-    // const checkGuardianAcceptance = async () => {
-    //   if (!requestId) {
-    //     throw new Error("missing guardian request id");
-    //   }
-
-    //   const resBody = await relayer.requestStatus(requestId);
-    //   console.debug("guardian req res body", resBody);
-
-    //   if(resBody?.is_success) {
-    //     setLoading(false);
-    //     setButtonState(BUTTON_STATES.COMPLETE_RECOVERY);
-    //     checkRequestRecoveryStatusInterval?.clearInterval()
-    //   }
-    // }
-
-    // checkRequestRecoveryStatusInterval = setInterval(async () => {
-    //     const res = await checkGuardianAcceptance();
-    //     console.log(res)
-    // }, 5000);
   }, [recoveryRouterAddr, address, guardianEmail, newOwner]);
 
   const completeRecovery = useCallback(async () => {
@@ -110,15 +90,6 @@ const RequestedRecoveries = () => {
 
     setButtonState(BUTTON_STATES.RECOVERY_COMPLETED);
   }, [recoveryRouterAddr]);
-
-  // const checkGuardianAcceptance = useCallback(async () => {
-  //   if (!gurdianRequestId) {
-  //     throw new Error("missing guardian request id");
-  //   }
-
-  //   const resBody = await relayer.requestStatus(gurdianRequestId);
-  //   console.debug("guardian req res body", resBody);
-  // }, [gurdianRequestId]);
 
   const getButtonComponent = () => {
     switch (buttonState) {
@@ -227,10 +198,10 @@ const RequestedRecoveries = () => {
                 }}
               >
                 <p>Guardian's Email</p>
-                <input
-                  style={{ width: "100%" }}
+                <InputField
                   type="email"
                   value={guardianEmail}
+                  onChange={() => {}}
                   readOnly={true}
                 />
               </div>
@@ -242,10 +213,9 @@ const RequestedRecoveries = () => {
                 }}
               >
                 <p>Requested New Wallet Address</p>
-                <input
-                  style={{ width: "100%" }}
+                <InputField
                   type="email"
-                  value={newOwner}
+                  value={newOwner || ""}
                   onChange={(e) => setNewOwner(e.target.value)}
                 />
               </div>

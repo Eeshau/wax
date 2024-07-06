@@ -94,29 +94,29 @@ function App() {
                   <Grid container>
                     {/* GNOSIS SAFE */}
                     <Grid item xs={6} padding='20px'>
-                      <Box sx={{height:'250px', background:'#FFFFFF', border:'1px solid #B3B3B3', borderRadius:'18px'}}>
+                      <Box sx={{height:'250px', width:'500px', marginX: 'auto',background:'#FFFFFF', border:'1px solid #B3B3B3', borderRadius:'18px'}}>
                         <LockClockOutlinedIcon fill='black' sx={{marginTop:'25px'}}/>
                         <Typography variant='h4' sx={{fontWeight:'medium', letterSpacing: -2, paddingBottom:'10px', paddingTop:'10px'}}>Gnosis Safe</Typography>
                         <Typography sx={{color:'#848281', fontWeight:'regular', fontSize: '16px', paddingBottom:'10px'}}>Copy the link and import into your Safe wallet</Typography>
                         <ConnectWallets/>
-                        <Box sx={{display:'flex'}}>
+                        {/* <Box sx={{display:'flex'}}>
                           <InfoOutlinedIcon fill='black'/>
                           <Typography>Copy the link and import into your Safe wallet</Typography>
-                        </Box>
+                        </Box> */}
                       </Box>
                     </Grid>
 
                     {/* TEST WALLET */}
                     <Grid item xs={6} padding='20px'>
-                      <Box sx={{height:'250px', background:'#FFFFFF', border:'1px solid #B3B3B3', borderRadius:'18px'}}>
+                      <Box sx={{height:'250px',  width:'500px', marginX: 'auto', background:'#FFFFFF', border:'1px solid #B3B3B3', borderRadius:'18px'}}>
                         <AccountBalanceWalletOutlinedIcon fill='black' sx={{marginTop:'25px'}}/>
                         <Typography variant='h4' sx={{fontWeight:'medium', letterSpacing: -2, paddingBottom:'10px', paddingTop:'10px'}}>Test Wallet </Typography>
                         <Typography sx={{color:'#848281', fontWeight:'regular', fontSize: '16px', paddingBottom:'10px'}}>Connect to see the test wallet flow</Typography>
                         <ConnectWallets/>
-                        <Box sx={{display:'flex'}}>
+                        {/* <Box sx={{display:'flex'}}>
                           <InfoOutlinedIcon fill='black'/>
                           <Typography>Test out setting up a recovery wallet with a test wallet</Typography>
-                        </Box>
+                        </Box> */}
                       </Box>
                     </Grid>
                   </Grid>
@@ -131,7 +131,7 @@ function App() {
 
 
                 // RECOVERY FLOW
-                <Box sx={{height:'250px', background:'#FFFFFF', border:'1px solid #B3B3B3', borderRadius:'18px',  margin:'25px'}}>
+                <Box sx={{height:'250px',  width:'800px', marginX: 'auto', background:'#FFFFFF', border:'1px solid #B3B3B3', borderRadius:'18px',  marginY:'25px'}}>
 
                   <Typography variant='h4' sx={{fontWeight:'medium', letterSpacing: -2, paddingBottom:'10px', paddingTop:'50px'}}>Recover Wallet</Typography>
 
@@ -146,10 +146,12 @@ function App() {
                     <Button variant='outlined' sx={{borderWidth:'1px'}}>I know my gaudian emails</Button>
                   </Box>
 
-                  <Box sx={{display:'flex'}}>
+                  
+                  <Box sx={{display:'flex', justifyContent:'center', paddingTop:'13px'}}>
                     <InfoOutlinedIcon fill='black'/>
                     <Typography>Copy the link and import into your Safe wallet</Typography>
                   </Box>
+       
                 </Box>
               )}
             </div>
@@ -159,10 +161,10 @@ function App() {
 
             {/* eesha temporaily moving components here for frontend redesign */}
             <Box sx={{marginTop:'200px'}}>
-            <h1>Components below</h1>
+            <h2>Components below swapped based on switch(just for editing)</h2>
             {/* {renderBody()} */}
             <RequestGuardian />
-            {/* <RequestedRecoveries/> */}
+            <RequestedRecoveries/>
             </Box>
 
           </div>

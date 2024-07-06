@@ -55,7 +55,7 @@ const NavBar: React.FC = () => {
                   </Grid>
                   <Grid item xs={4} sx={{ paddingY:'10px',  margin: 'auto'}}>
                     <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', margin: 'auto'}}>
-                        <Button variant="outlined" sx={{ marginRight: theme.spacing(2) }}>Check out demo</Button>
+                        <Button variant="outlined" sx={{ marginRight: theme.spacing(2) ,textTransform:'none'}}>Check out Demo</Button>
                         <ConnectKitButton />
                     </Box>
                   </Grid>

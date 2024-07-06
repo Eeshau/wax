@@ -14,9 +14,10 @@ import { relayer } from "../services/relayer";
 import { StepsContext } from "../App";
 import { STEPS } from "../constants";
 import { useTheme } from "@emotion/react";
-import { Box, Grid, Typography, Divider } from '@mui/material';
+import { Box, Grid, Typography } from '@mui/material';
 import InputField from "./InputField";
-
+import InputNumber from "./InputNumber"; // Import the new component
+import StatusTag from "./StatusTag"
 const RequestGuardian = () => {
   const theme = useTheme();
 
@@ -120,24 +121,23 @@ const RequestGuardian = () => {
   return (
     <Box sx={{marginX: 'auto'}}>
     <Typography variant='h2' sx={{paddingBottom:'80px', fontWeight:'bold', color: '#333741'}}>Set Up Guardian Details </Typography>
-    <Grid container spacing={3} sx={{ maxWidth: isMobile ? "100%" : "50%", width: "100%", marginX: 'auto' }}>
+    <Grid container spacing={3} sx={{ maxWidth: isMobile ? "100%" : "60%", width: "100%", marginX: 'auto' }}>
 
-      <Grid item xs={6} sx={{borderRight:'2px solid #EBEBEB', paddingRight: '30px'}}>
-        <Box display="flex" flexDirection="column" gap="1rem">
-          <Box display="flex" alignItems="center">
-            <Typography variant="body1">Recovery Delay (seconds)</Typography>
-            <input
-              style={{ width: "3rem", marginLeft: "1rem" }}
-              type="number"
-              min={1}
-              value={recoveryDelay}
-              onChange={(e) => setRecoveryDelay(Number(e.target.value))}
-            />
-          </Box>
-          <Box display="flex" flexDirection="column" gap="1rem" sx={{textAlign:'left'}}>
-            <Typography variant="body1">Connected wallet:</Typography>
-            <ConnectKitButton />
-          </Box>
+    <Grid item xs={6} sx={{borderRight:'3px solid #EBEBEB', paddingRight: '30px'}}>
+      <Box display="flex" flexDirection="column" gap="1rem" sx={{paddingRight: '5px'}}>
+        <Box display="flex" alignItems="center">
+          <Typography variant="body1" sx={{marginRight:'25px'}}>Recovery Delay (seconds)</Typography>
+          <InputNumber
+            value={recoveryDelay}
+            onChange={(e) => setRecoveryDelay(Number(e.target.value))}
+            min={1}
+          />
+        </Box>
+        <Box display="flex" flexDirection="column" gap="1rem" sx={{textAlign:'left'}}>
+          <Typography variant="body1">Connected wallet:</Typography>
+          <ConnectKitButton />
+        </Box>
+        <Box sx={{textAlign:'left'}}>
           <InputField
             type="text"
             value={guardianEmail}
@@ -145,20 +145,24 @@ const RequestGuardian = () => {
             label="Add a Guardian Message"
           />
         </Box>
-      </Grid>
+      </Box>
+    </Grid>
+
 
       <Grid item xs={6} sx={{textAlign:'left'}}>
-        <Typography variant="h5" sx={{paddingBottom:'20px'}}>Guardian Details:</Typography>
-        <Box display="flex" flexDirection="column" gap="1rem">
-          {[1, 2, 3].map((index) => (
-            <InputField
-              key={index}
-              type="email"
-              value={guardianEmail}
-              onChange={(e) => setGuardianEmail(e.target.value)}
-              label={`Guardian's Email`}
-            />
-          ))}
+        <Box sx={{paddingLeft: '20px'}}>
+          <Typography variant="h5" sx={{paddingBottom:'20px', fontWeight:700}}>Guardian Details:</Typography>
+          <Box display="flex" flexDirection="column" gap="1rem">
+            {[1, 2, 3].map((index) => (
+              <InputField
+                key={index}
+                type="email"
+                value={guardianEmail}
+                onChange={(e) => setGuardianEmail(e.target.value)}
+                label={`Guardian's Email`}
+              />
+            ))}
+          </Box>
         </Box>
       </Grid>
       
@@ -168,6 +172,8 @@ const RequestGuardian = () => {
         </Button>
       </Grid>
     </Grid>
+    <StatusTag status="Guarded" />
+    <StatusTag status="Recovered" />
     </Box>
   );
 };
