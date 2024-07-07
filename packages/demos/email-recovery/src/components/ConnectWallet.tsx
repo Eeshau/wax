@@ -53,7 +53,7 @@ import { useAccount } from "wagmi";
 import { useContext } from "react";
 import { StepsContext } from "../App";
 import { STEPS } from "../constants";
-import { Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 
 const ConnectWallet = () => {
   const { address } = useAccount();
@@ -78,9 +78,11 @@ const ConnectWallet = () => {
       <ConnectKitButton.Custom>
         {({ show }) => {
           return (
-            <Button onClick={show} endIcon={<AccountBalanceWalletOutlinedIcon/>}>
-              Connect Safe
-            </Button>
+            <Box width='170px' margin='auto'>
+              <Button onClick={show} endIcon={<AccountBalanceWalletOutlinedIcon/>}>
+                Connect Safe
+              </Button>
+            </Box>
           );
         }}
       </ConnectKitButton.Custom>

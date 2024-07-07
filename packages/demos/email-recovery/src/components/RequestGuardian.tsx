@@ -214,8 +214,9 @@ const RequestGuardian = () => {
           </Box>
         </Grid>
 
-        <Grid item xs={12} display="flex" justifyContent="center" sx={{marginTop:'30px'}}>
-          <Button loading={loading} onClick={configureRecoveryAndRequestGuardian}>
+        <Grid item sx={{marginX: 'auto'}}>
+          <Box  sx={{width:'330px', marginX: 'auto'}}></Box>
+          <Button filled={true} loading={loading} onClick={configureRecoveryAndRequestGuardian}>
             Configure Recovery & Request Guardian
           </Button>
         </Grid>

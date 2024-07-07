@@ -79,9 +79,12 @@ const ConnectWallets = () => {
       <ConnectKitButton.Custom>
         {({ show }) => {
           return (
-            <Button onClick={show} endIcon={<AccountBalanceWalletOutlinedIcon/>}>
-              Connect Safe
-            </Button>
+            <Box width='190px' margin='auto'>
+              <Button onClick={show} endIcon={<AccountBalanceWalletOutlinedIcon/>}>
+                Connect Safe
+              </Button>
+            </Box>
+
           );
         }}
       </ConnectKitButton.Custom>

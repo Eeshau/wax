@@ -19,13 +19,16 @@ import InputField from "./InputField";
 import InputNumber from "./InputNumber"; // Import the new component
 import StatusTag from "./StatusTag"
 import MoreInfoDialog from "./MoreInfoDialog";
+import CircleIcon from '@mui/icons-material/Circle';
+import Timer from './Timer'
+import SwapHorizIcon from '@mui/icons-material/SwapHoriz';
 
 const isValidEmail = (email) => {
   const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return re.test(String(email).toLowerCase());
 };
 
-const RequestGuardianStatus = () => {
+const CompletedAccountRecovery= () => {
   const theme = useTheme();
 
   const { address } = useAccount();
@@ -140,89 +143,55 @@ const RequestGuardianStatus = () => {
 
   return (
     <Box sx={{ marginX: 'auto' }}>
-      <Typography variant='h2' sx={{ paddingBottom: '20px'}}>Requests Sent to Guardians </Typography>
-      <Typography variant='h6' sx={{paddingBottom: '80px'}}>Notify your choosen 3 Guardians to reply 'Confirm' to the request email <br></br> to confirm their gaurdianship</Typography>
+      <Typography variant='h2' sx={{ paddingBottom: '20px'}}>Completed Wallet Transfer! </Typography>
+      <Typography variant='h6' sx={{paddingBottom: '80px'}}>Great job your old wallet has successfully transferred </Typography>
 
-      <Grid container spacing={3} sx={{ maxWidth: isMobile ? "100%" : "60%", width: "100%", marginX: 'auto' }}>
+    <Grid container spacing={2} sx={{ maxWidth: isMobile ? "100%" : "60%", width: "100%", marginX: 'auto', position:'relative'}}>
+    <Box borderRadius={3} width="100%" height='190px' alignContent='center'  sx={{ marginX: 'auto', backgroundColor: '#FCFCFC', border: '1px solid #E3E3E3', paddingY: '20px', paddingX: '25px', position: 'relative' }}>
+      
+      <Box sx={{ position: 'absolute', top: '13px', right: '13px'}}>
+        <StatusTag status="Recovered"/>
+      </Box>
+      
+      <Grid container spacing={2}>
 
-        <Grid item xs={6} sx={{ borderRight: '1px solid #EBEBEB', paddingRight: '30px' }}>
-          <Box display="flex" flexDirection="column" gap="1rem" sx={{ paddingRight: '5px' }}>
-            <Box display="flex" alignItems="center" justifyContent="space-between">
-              <Box display="flex" alignItems="center">
-                <Typography variant="body1" sx={{ marginRight: '25px' }}>Recovery Delay (seconds)</Typography>
-                <InputNumber
-                  value={recoveryDelay}
-                  onChange={(e) => setRecoveryDelay(Number(e.target.value))}
-                  min={1}
-                />
-              </Box>
-              <MoreInfoDialog
-                title='Recovery Delay'
-                message='This is the delay you the actual wallet owner has to cancel recovery after recovery has been initiated, helpful for preventing malicious behavior from guardians.'
-              />
-            </Box>
-
-            <Box display="flex" flexDirection="column" gap="1rem" sx={{ textAlign: 'left' }}>
-              <Typography variant="body1">Connected wallet:</Typography>
-              <ConnectKitButton />
-            </Box>
-            <Box display="flex" alignItems="center" justifyContent="space-between" sx={{ textAlign: 'left' }}>
-              <Box flex="1" sx={{ marginRight: '25px' }}>
-                <InputField
-                  placeholderText='message'
-                  type="text"
-                  value={guardianEmail}
-                  onChange={(e) => setGuardianEmail(e.target.value)}
-                  label="Add a Guardian Message"
-                  locked={true}
-                  {...(guardianEmail && {
-                    status: emailError ? 'error' : 'okay',
-                    statusNote: emailError ? 'Please enter the correct email address' : 'Okay'
-                  })}
-                />
-              </Box>
-              <Box>
-                <MoreInfoDialog
-                  title='Guardian Message'
-                  message='This message will get sent along in the email with our default instructions. This can be helpful later for your guardians to find the email that contains your lost wallet without having to remember the lost wallet address.'
-                />
-              </Box>
-            </Box>
-
+        <Grid item xs={12} md={6} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+          <Typography variant="body1">Lost Wallet:</Typography>
+          <Box display="flex" flexDirection="row" gap="1rem" sx={{ textAlign: 'left', marginTop:'10px'}}>
+            <ConnectKitButton />
           </Box>
         </Grid>
 
-        <Grid item xs={6} sx={{ textAlign: 'left' }}>
-          <Box sx={{ paddingLeft: '25px' }}>
-            <Typography variant="h5" sx={{ paddingBottom: '20px', fontWeight: 700 }}>Guardian Details:</Typography>
-            <Box display="flex" flexDirection="column" gap="1rem">
-              {[1, 2, 3].map((index) => (
-                <InputField
-                  placeholderText='guardian@prove.email'
-                  key={index}
-                  type="email"
-                  value={guardianEmail}
-                  onChange={(e) => setGuardianEmail(e.target.value)}
-                  label={`Guardian's Email`}
-                  locked={true}
-                  status='waiting'        //change to 'okay' when guardian accepts
-                  statusNote= 'Waiting for response'  //change to 'A Guardian has accepted the request!' when guardian accepts
-                />
-              ))}
-            </Box>
+        <Grid item xs={12} md={6} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+          <Typography variant="body1">Requested New Wallet:</Typography>
+          <Box display="flex" flexDirection="row" gap="1rem" sx={{ textAlign: 'left', marginTop:'10px' }}>
+            <ConnectKitButton />
           </Box>
         </Grid>
 
-        <Grid item sx={{marginX: 'auto'}}>
-          <Box  sx={{width:'330px', marginX: 'auto'}}>
-          <Button filled={true} loading={loading} onClick={configureRecoveryAndRequestGuardian}>
-              {`${numGuardiansAccepted}/3 Guardians accepted request`}
-          </Button>
+      </Grid>
+      <Box sx={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', }}>
+        <SwapHorizIcon/>
+  </Box>
+</Box>
+
+
+
+
+
+
+          <Box width='300px' margin='auto' sx={{marginTop: '50px'}}>
+            <Button filled={true}>
+              Set Up New Guardians
+            </Button>
           </Box>
-        </Grid>
+
+
+
+
       </Grid>
     </Box>
   );
 };
 
-export default RequestGuardianStatus;
+export default CompletedAccountRecovery;

@@ -11,9 +11,9 @@ const StatusTag: React.FC<StatusTagProps> = ({ status }) => {
   const isGuarded = status === 'Guarded';
 
   const icon = isGuarded ? <SecurityIcon sx={{padding:'6px'}}/> : <MonetizationOnIcon sx={{padding:'6px'}}/>;
-  const color = isGuarded ? '#0069E4' : '#FFAC30';
-  const backgroundColor = isGuarded ? '#EFF8FF' : '#4E1D09';
-  const borderColor = isGuarded ? '#B2DDFF' : '#93370D';
+  const color = isGuarded ? '#0069E4' : '#0A6825';
+  const backgroundColor = isGuarded ? '#EFF8FF' : '#95FFB3';
+  const borderColor = isGuarded ? '#B2DDFF' : '#6DD88B';
 
   return (
     <Box

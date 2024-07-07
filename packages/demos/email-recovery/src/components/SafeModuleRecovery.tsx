@@ -65,8 +65,8 @@ const SafeModuleRecovery = () => {
       </Box>
 
       {!isModuleEnabled ? (
-        <Box sx={{marginX: 'auto', width: '500px'}}>
-          <Button disabled={loading} onClick={enableEmailRecoveryModule}>
+        <Box sx={{marginX: 'auto', width: '310px'}}>
+          <Button filled={true} disabled={loading} onClick={enableEmailRecoveryModule}>
             Enable Email Recovery Module
           </Button>
         </Box>

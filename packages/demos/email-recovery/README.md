@@ -46,6 +46,8 @@ yarn dev
 
 
 # Comments from Eesha
+Figma Flow:
+https://www.figma.com/design/bDHeBEeeUdCkHKQ3e9raO9/Account-Recover-Redesign?node-id=0-1&t=zw2wwNSrKyLJKxF5-0
 
 ## things I added
 - npm install -D tailwindcss postcss autoprefixer

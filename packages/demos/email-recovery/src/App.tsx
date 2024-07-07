@@ -28,6 +28,8 @@ import { PerformRecovery } from "./components/PerformRecovery";
 import SvgWrapper from './components/SvgIconWrapper';
 import gnosisSafeLogo from './assets/gnosis-safe-logo.svg';
 import MoreInfoDialog from "./components/MoreInfoDialog";
+import CompleteAccountRecovery from "./components/CompleteAccountRecovery";
+import CompletedAccountRecovery from "./components/CompletedAccountRecovery";
 
 export const StepsContext = createContext(null);
 
@@ -143,7 +145,7 @@ function App() {
 
                 /* RECOVERY FLOW! */
                 <Box sx={{height:'310px', width:'800px', marginX: 'auto', background:'#FFFFFF', border:'1px solid #DDDDDD', borderRadius:'18px', marginY:'25px', paddingY: '20px', paddingX: '50px', position:'relative'}}>
-                  <Box sx={{ position: 'absolute', top: '10px', right: '12px'}}>
+                  <Box sx={{ position: 'absolute', top: '10px', right: '15px'}}>
                     <MoreInfoDialog
                       title='Recover Your Lost Recovery Enabled Wallet' 
                       message='If you forgot your lost wallet address reach out to your gaurdians, they will have the lost wallet address inside the emails they got when they agreed to be gaurdians, they can also identify the email by looking for your gaurdian message inside the email. If you forgot your gaurdian emails you can still atempt recovery'
@@ -189,11 +191,15 @@ function App() {
               {/* getting the responses status from guardians*/}
               {/* <RequestGuardianStatus />  */}
               {/* <WalletGuarded/> */}
-              
-
+          
              
               {/* <RequestedRecoveries /> */}
-              <TriggerAccountRecoveryEmails/>
+
+              {/* <TriggerAccountRecoveryEmails/> */}
+              {/* <CompleteAccountRecovery/> */}
+              <CompletedAccountRecovery/>
+
+
               {/* trigger recovery breaks  */}
               {/* <TriggerAccountRecovery/>  */}
               {/* <PerformRecovery/> */}

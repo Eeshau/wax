@@ -1,46 +1,30 @@
-// import React from "react";
-
-// export function Button({
-//   children,
-//   ...buttonProps
-// }: React.ComponentPropsWithoutRef<"button">) {
-//   return (
-//     <div className="button">
-//       <button {...buttonProps}>
-//         {children}
-//         {buttonProps.endIcon ? buttonProps.endIcon : null}
-//         {buttonProps?.loading ? <div className="loader" /> : null}
-//       </button>
-//     </div>
-//   );
-// }
-
-
 import React, { ReactNode } from "react";
 import { Button as MuiButton, ButtonProps as MuiButtonProps, CircularProgress, useTheme } from "@mui/material";
 
 type ButtonProps = {
   endIcon?: ReactNode;
   loading?: boolean;
+  filled?: boolean; // Add the filled prop
 } & MuiButtonProps;
 
-export function Button({ children, endIcon, loading, ...buttonProps }: ButtonProps) {
+export function Button({ children, endIcon, loading, filled = false, ...buttonProps }: ButtonProps) {
   const theme = useTheme();
 
   return (
     <MuiButton 
       sx={{
-        borderColor: '#94969C', 
+        width: '100%', // Make the button take the full width of its container
+        borderColor: filled ? 'transparent' : '#94969C', 
         borderWidth: '1px', 
         borderRadius: '26px',
         paddingX: '26px',
         paddingY: '13px',
         borderStyle: 'solid', 
-        backgroundColor: 'rgba(255, 255, 255, 0.87)',
+        backgroundColor: filled ? '#FD4BA1' : 'rgba(255, 255, 255, 0.87)',
         textTransform: 'none',
-        color: theme.palette.primary.main, // Set text color
+        color: filled ? '#FFFFFF' : theme.palette.primary.main, // Set text color based on filled prop
         ':hover': {
-          backgroundColor: '#E0F6FF', // Background color on hover
+          backgroundColor: filled ? '#FD4BA1' : '#E0F6FF', // Background color on hover
         },
         ':focus': {
           outline: 'none', // Remove outline on focus

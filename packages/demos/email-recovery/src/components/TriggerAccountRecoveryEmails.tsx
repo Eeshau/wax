@@ -169,7 +169,7 @@ const TriggerAccountRecoveryEmails= () => {
                   <Box display="flex" flexDirection="column" gap="1rem" justifyItems='left' sx={{ textAlign: 'left' }}>
                     <Typography variant="body1">Timer:</Typography>
                       {/* TIMER COUNTDOWN DELAY*/}
-                      <Timer initialTime={300} /> {/* 5 minutes */}
+                      <Timer initialTime={0} /> {/* 0 minutes */}
 
                   </Box>
                   <Box display="flex" flexDirection="row" gap="1rem" sx={{ textAlign: 'left' }}>
@@ -238,13 +238,13 @@ const TriggerAccountRecoveryEmails= () => {
         </Grid>
 
         <Grid item xs={12} sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', marginTop: '30px' }}>
-          <Box width='300px' margin='auto'>
+          <Box width='220px' margin='auto'>
             <Button>
               Trigger Recovery
             </Button>
           </Box>
-          <Box width='300px' margin='auto' sx={{marginTop: '20px'}}>
-            <Button>
+          <Box width='220px' margin='auto' sx={{marginTop: '20px'}}>
+            <Button filled={true}>
               3/3 Complete Recovery
             </Button>
           </Box>
