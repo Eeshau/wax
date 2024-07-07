@@ -6,6 +6,7 @@ import { abi as safeAbi } from "../abi/Safe.json";
 import { useCallback, useContext, useEffect, useState } from "react";
 import { StepsContext } from "../App";
 import { STEPS } from "../constants";
+import {Box} from '@mui/material'
 
 const SafeModuleRecovery = () => {
   const { address } = useAccount();
@@ -54,9 +55,12 @@ const SafeModuleRecovery = () => {
         Connected wallet: <ConnectKitButton />
       </div>
       {!isModuleEnabled ? (
-        <Button disabled={loading} onClick={enableEmailRecoveryModule}>
-          Enable Email Recovery Module
-        </Button>
+        <Box sx={{marginX: 'auto', width: '500px'}}>
+          <Button disabled={loading} onClick={enableEmailRecoveryModule}>
+            Enable Email Recovery Module
+          </Button>
+        </Box>
+
       ) : null}
     </div>
   );

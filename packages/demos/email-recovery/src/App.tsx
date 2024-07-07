@@ -11,13 +11,13 @@ import { Web3Provider } from "./providers/Web3Provider";
 import { ConnectKitButton } from "connectkit";
 import { useAccount } from "wagmi";
 import { AppContextProvider } from "./context/AppContextProvider";
-import { useTheme, Grid, Typography, Box, TextField } from '@mui/material';
+import { useTheme, Grid, Typography, Box, TextField, Stack } from '@mui/material';
 import './App.css';
 import DraftsOutlinedIcon from '@mui/icons-material/DraftsOutlined';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import AccountBalanceWalletOutlinedIcon from '@mui/icons-material/AccountBalanceWalletOutlined';
 import Toggle from './components/Toggle';
-import { Button } from './components/Button';
+import { Button } from "./components/Button";
 import { Link } from 'react-router-dom';
 import InputField from "./components/InputField";
 import { PerformRecovery } from "./components/PerformRecovery";
@@ -41,6 +41,8 @@ function App() {
   console.log(import.meta.env.VITE_WALLET_CONNECT_PROJECT_ID);
 
   const [step, setStep] = useState(STEPS.CONNECT_WALLETS);
+
+
 
   const renderBody = () => {
     switch (step) {
@@ -150,14 +152,13 @@ function App() {
                       <InputField label="Lost Wallet" type='text' value=" " />
                     </Grid>
                     <Grid item xs={6}>
-                      <InputField label="New address" type='text' value=" " />
+                      <InputField label="Requested New Wallet Address" type='text' value=" " />
                     </Grid>
                   </Grid>
 
-                  <Box>
-                    <Button variant='outlined' sx={{borderWidth:'1px'}}>I don’t know my guardian emails</Button>
-                    <Button variant='outlined' sx={{borderWidth:'1px'}}>I know my guardian emails</Button>
-                  </Box>
+                  <Stack  sx={{ marginTop: '40px', width:'270px', marginX: 'auto'}}>
+                    <Button>Request Wallet Transfer</Button>
+                  </Stack>
 
                   {/* <Box sx={{display:'flex', justifyContent:'center', paddingTop:'13px'}}>
                     <Typography>Copy the link and import into your Safe wallet</Typography>
@@ -169,10 +170,26 @@ function App() {
             {/* Temporarily moving components here for frontend redesign */}
             <Box sx={{marginTop:'200px'}}>
               <h2>Components below swapped based on switch (just for editing)</h2>
-              {/* {renderBody()} */}
-              <RequestGuardian />
-              <RequestedRecoveries />
-              <PerformRecovery />
+              {renderBody()}
+
+              {/* <ConnectWallets /> */}
+              {/* <SafeModuleRecovery/> */}
+              {/* <RequestGuardian /> */}
+              {/* <RequestedRecoveries /> */}
+
+              {/* trigger recovery breaks  */}
+              {/* <TriggerAccountRecovery/>  */}
+              <PerformRecovery/>
+
+  {/*The STEPS are
+    CONNECT_WALLETS: 0,
+    SAFE_MODULE_RECOVERY: 1,
+    REQUEST_GUARDIAN: 2,
+    REQUESTED_RECOVERIES: 3,
+    TRIGGER_ACCOUNT_RECOVERY: 4,
+  */}
+  
+              
             </Box>
 
           </div>
