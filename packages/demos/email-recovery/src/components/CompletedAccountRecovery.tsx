@@ -149,7 +149,7 @@ const CompletedAccountRecovery= () => {
     <Grid container spacing={2} sx={{ maxWidth: isMobile ? "100%" : "60%", width: "100%", marginX: 'auto', position:'relative'}}>
     <Box borderRadius={3} width="100%" height='190px' alignContent='center'  sx={{ marginX: 'auto', backgroundColor: '#FCFCFC', border: '1px solid #E3E3E3', paddingY: '20px', paddingX: '25px', position: 'relative' }}>
       
-      <Box sx={{ position: 'absolute', top: '13px', right: '13px'}}>
+      <Box sx={{ position: 'absolute', top: '13px', right: '15px'}}>
         <StatusTag status="Recovered"/>
       </Box>
       
