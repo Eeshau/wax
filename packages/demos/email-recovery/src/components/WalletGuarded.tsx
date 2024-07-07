@@ -33,7 +33,7 @@ const WalletGuarded = () => {
   const { address } = useAccount();
   const { writeContractAsync } = useWriteContract();
 
-  const { guardianEmail, setGuardianEmail, accountCode, setAccountCode } = useAppContext();
+  const { guardianEmail, setGuardianEmail, accountCode, setAccountCode, guardianMessage, setGuardianMessage } = useAppContext();
   const stepsContext = useContext(StepsContext);
 
   const [loading, setLoading] = useState(false);
@@ -189,17 +189,13 @@ const WalletGuarded = () => {
             <Box display="flex" alignItems="center" justifyContent="space-between" sx={{ textAlign: 'left' }}>
               <Box flex="1" sx={{ marginRight: '25px' }}>
                 <InputField
-                  placeholderText='message'
-                  type="text"
-                  value={guardianEmail}
-                  onChange={(e) => setGuardianEmail(e.target.value)}
-                  label="Attached Email Guardian Message"
-                  locked={true}
-                  {...(guardianEmail && {
-                    status: emailError ? 'error' : 'okay',
-                    statusNote: emailError ? 'Please enter the correct email address' : 'Okay'
-                  })}
-                />
+                    placeholderText={guardianMessage}
+                    type="text"
+                    value={guardianMessage}
+                    onChange={(e) => setGuardianMessage(e.target.value)}
+                    label="Add a Guardian Message"
+                    locked={true}
+                  />
               </Box>
               {/* <Box>
                 <MoreInfoDialog
@@ -233,10 +229,12 @@ const WalletGuarded = () => {
           </Box>
         </Grid>
 
-        <Grid item xs={12} display="flex" justifyContent="center" sx={{marginTop:'30px'}}>
-          <Button>
+        <Grid item xs={12} sx={{marginTop:'30px'}}>
+          <Box  sx={{width:'330px', marginX: 'auto'}}>
+          <Button href="/">
               Return Home
           </Button>
+          </Box>
         </Grid>
       </Grid>
     </Box>

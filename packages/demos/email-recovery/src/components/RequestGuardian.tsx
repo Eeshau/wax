@@ -26,12 +26,13 @@ const isValidEmail = (email) => {
 };
 
 const RequestGuardian = () => {
+
   const theme = useTheme();
 
   const { address } = useAccount();
   const { writeContractAsync } = useWriteContract();
 
-  const { guardianEmail, setGuardianEmail, accountCode, setAccountCode } = useAppContext();
+  const { guardianEmail, setGuardianEmail, accountCode, setAccountCode, guardianMessage, setGuardianMessage } = useAppContext();
   const stepsContext = useContext(StepsContext);
 
   const [loading, setLoading] = useState(false);
@@ -54,6 +55,8 @@ const RequestGuardian = () => {
     return safeOwners[0];
   }, [safeOwnersData]);
 
+
+  //logic to check if email input is a valid email
   useEffect(() => {
     if (!guardianEmail) {
       setEmailError(false);
@@ -63,6 +66,8 @@ const RequestGuardian = () => {
       setEmailError(false);
     }
   }, [guardianEmail]);
+
+
 
   const configureRecoveryAndRequestGuardian = useCallback(async () => {
     if (!address) {
@@ -92,6 +97,7 @@ const RequestGuardian = () => {
         args: [guardianSalt],
       });
       const previousOwnerInLinkedList = pad("0x1", { size: 20 });
+
 
       await writeContractAsync({
         abi: recoveryPluginAbi,
@@ -137,6 +143,9 @@ const RequestGuardian = () => {
     writeContractAsync,
   ]);
 
+
+
+
   return (
     <Box sx={{ marginX: 'auto' }}>
       <Typography variant='h2' sx={{ paddingBottom: '20px'}}>Set Up Guardian Details </Typography>
@@ -170,14 +179,10 @@ const RequestGuardian = () => {
                 <InputField
                   placeholderText='message'
                   type="text"
-                  value={guardianEmail}
-                  onChange={(e) => setGuardianEmail(e.target.value)}
+                  value={guardianMessage}
+                  onChange={(e) => setGuardianMessage(e.target.value)}
                   label="Add a Guardian Message"
                   locked={false}
-                  {...(guardianEmail && {
-                    status: emailError ? 'error' : 'okay',
-                    statusNote: emailError ? 'Please enter the correct email address' : 'Okay'
-                  })}
                 />
               </Box>
               <Box>

@@ -20,8 +20,8 @@ const theme = createTheme({
     h1: {
       // fontFamily: berkeleyOldStyle.style.fontFamily, // Use Berkeley Old Style for h1
       fontSize: '5rem', // Default font size for the smallest screens (xs)
-      letterSpacing: -2,
-      fontWeight: '400'
+      letterSpacing: -3,
+      fontWeight: '500'
     },
     h2: {
        fontWeight: '700', 

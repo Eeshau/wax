@@ -30,6 +30,7 @@ import gnosisSafeLogo from './assets/gnosis-safe-logo.svg';
 import MoreInfoDialog from "./components/MoreInfoDialog";
 import CompleteAccountRecovery from "./components/CompleteAccountRecovery";
 import CompletedAccountRecovery from "./components/CompletedAccountRecovery";
+import { SpaceBar } from "@mui/icons-material";
 
 export const StepsContext = createContext(null);
 
@@ -136,9 +137,15 @@ function App() {
 
 
                   {/*  PROMPT TO CONTACT IF U WANT ANOTHER WALLET AT BOTTOM*/}
-                  <Box sx={{paddingTop:'50px', paddingBottom:'40px'}}>
-                    <Typography>Want us to setup account recovery for a different wallet? <Link to='https://t.me/zkemail' target="_blank" >Contact Us!</Link></Typography>
+                  <Box sx={{ paddingTop: '50px', paddingBottom: '40px' }}>
+                    <Typography>
+                      Want us to setup account recovery for a different wallet?&nbsp;
+                      <Link to='https://t.me/zkemail' target="_blank" style={{ fontWeight: 'bold' }}>
+                        Contact Us!
+                      </Link>
+                    </Typography>
                   </Box>
+
                 </Box>
 
               ) : (
@@ -186,7 +193,8 @@ function App() {
 
               {/* <ConnectWallets /> */}
               {/* <SafeModuleRecovery/> */}
-              {/* setting up the guardians*/}
+
+              {/* setting up the guardians */}
               {/* <RequestGuardian /> */}
               {/* getting the responses status from guardians*/}
               {/* <RequestGuardianStatus />  */}
@@ -197,7 +205,7 @@ function App() {
 
               {/* <TriggerAccountRecoveryEmails/> */}
               {/* <CompleteAccountRecovery/> */}
-              <CompletedAccountRecovery/>
+              {/* <CompletedAccountRecovery/> */}
 
 
               {/* trigger recovery breaks  */}
