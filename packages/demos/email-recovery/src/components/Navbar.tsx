@@ -8,7 +8,7 @@ import React from 'react';
 import { useTheme } from '@mui/material/styles';
 import {AppBar, Grid} from '@mui/material/';
 import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
+import {Button} from './Button';
 import Box from '@mui/material/Box';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import { Web3Provider } from "../providers/Web3Provider";
@@ -55,7 +55,21 @@ const NavBar: React.FC = () => {
                   </Grid>
                   <Grid item xs={4} sx={{ paddingY:'10px',  margin: 'auto'}}>
                     <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', margin: 'auto'}}>
-                        <Button variant="outlined" sx={{ marginRight: theme.spacing(2) ,textTransform:'none'}}>Check out Demo</Button>
+                        <Button variant="outlined" 
+                        sx={{ 
+                            marginRight: theme.spacing(2) ,
+                            textTransform:'none',
+                            ':hover': {
+                                backgroundColor: '#E0F6FF', // Background color on hover
+                            },
+                            ':focus': {
+                                outline: 'none', // Remove outline on focus
+                            },
+                            ':active': {
+                                outline: 'none', // Remove outline on active
+                            }
+                        }}>Check out Demo</Button>
+                        
                         <ConnectKitButton />
                     </Box>
                   </Grid>

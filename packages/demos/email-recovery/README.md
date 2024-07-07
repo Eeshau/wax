@@ -52,3 +52,4 @@ yarn dev
 - npm install @mui/material @emotion/react @emotion/styled
 - npm install @mui/icons-material
 - npm i -D react-router-dom 
+- npm install @svgr/webpack

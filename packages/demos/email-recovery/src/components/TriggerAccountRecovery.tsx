@@ -2,6 +2,8 @@ import { useState } from "react";
 import { Web3Provider } from "../providers/Web3Provider";
 import { ConnectKitButton } from "connectkit";
 import { Button } from "./Button";
+// import { Button } from "./Button";
+
 import cancelRecoveryIcon from "../assets/cancelRecoveryIcon.svg";
 import completeRecoveryIcon from "../assets/completeRecoveryIcon.svg";
 

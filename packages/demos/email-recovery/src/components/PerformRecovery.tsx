@@ -9,20 +9,12 @@ import {
 } from '../utils/email'
 import { safeZkSafeZkEmailRecoveryPlugin } from '../../contracts.base-sepolia.json'
 import { useAppContext } from '../context/AppContextHook'
+import InputField from './InputField'
 
 export function PerformRecovery() {
     const { address } = useAccount()
-
     const { guardianEmail } = useAppContext()
-
-    const [newOwner, setNewOwner] = useState<string>()
-
-    // TODO pull from recovery module
-    // const { data: timelock } = useReadContract({
-    //     address: simpleWalletAddress as HexStr,
-    //     abi: simpleWalletAbi,
-    //     functionName: 'timelock',
-    // });
+    const [newOwner, setNewOwner] = useState<string>('')
 
     const { data: recoveryRouterAddr } = useReadContract({
         abi: recoveryPluginAbi,
@@ -75,17 +67,16 @@ export function PerformRecovery() {
 
     return (
         <>
-            <label>
-                New Owner (address)
-                <input type='text'
-                    onInput={e => setNewOwner((e.target as HTMLTextAreaElement).value)}
-                />
-            </label>
+            <InputField
+                label='New Owner (address)'
+                type='text'
+                value={newOwner}
+                onChange={e => setNewOwner(e.target.value)}
+            />
 
             <Button onClick={requestRecovery}>
                 3. Request Recovery
             </Button>
-            {/* <div>{`TEST timelock: ${timelock}`}</div> */}
             <Button onClick={completeRecovery}>
                 TEST Complete Recovery (Switch to polling)
             </Button>

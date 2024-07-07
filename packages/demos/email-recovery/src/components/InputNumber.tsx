@@ -20,7 +20,7 @@ const InputNumber = ({ value, onChange, min = 1, ...props }) => {
       sx={{
         display: 'flex',
         alignItems: 'center',
-        border: '1px solid #DCDCDC',
+        border: '2px solid #DCDCDC',
         outline: 'none',
         borderRadius: '8px',
         paddingX: '0.2rem',
@@ -34,7 +34,9 @@ const InputNumber = ({ value, onChange, min = 1, ...props }) => {
         inputProps={{ min }}
         variant="standard"  // Use standard variant to have more control over the styles
         sx={{
+          color:'#667085',
           width: '3rem', 
+          textAlign: 'center',
           '& .MuiInputBase-input': {
             textAlign: 'center', // Center the text
           },
