@@ -1,10 +1,14 @@
 import { createContext, useEffect, useState } from "react";
 import "./App.css";
 import ConnectWallets from "./components/ConnectWallets";
+import ConnectWallet from "./components/ConnectWallet";
 import NavBar from "./components/NavBar";
 import RequestedRecoveries from "./components/RequestedRecoveries";
 import RequestGuardian from "./components/RequestGuardian";
+import RequestGuardianStatus from "./components/RequestGuardianStatus";
+import WalletGuarded from "./components/WalletGuarded";
 import SafeModuleRecovery from "./components/SafeModuleRecovery";
+import TriggerAccountRecoveryEmails from "./components/TriggerAccountRecoveryEmails"
 import TriggerAccountRecovery from "./components/TriggerAccountRecovery";
 import { STEPS } from "./constants";
 import { Web3Provider } from "./providers/Web3Provider";
@@ -73,7 +77,7 @@ function App() {
             <NavBar />
 
             <div className='bg-white'>
-              <Grid sx={{color:'10px', paddingTop: '200px'}}>
+              <Grid sx={{color:'10px', paddingTop: '120px'}}>
                 <Box display='flex' justifyContent='center' sx={{borderRadius:'25.95px', border:'1px solid #CECFD2', width: '170px', marginX: 'auto', padding:'5px', marginBottom:'20px'}}>
                   <DraftsOutlinedIcon fill='black' sx={{marginX:'5px', padding:'4px'}} />
                     ZK Email Tech
@@ -104,7 +108,7 @@ function App() {
                         <SvgWrapper src={gnosisSafeLogo} sx={{marginTop:'25px', width: '40px', height: '40px'}} />
                         <Typography variant='h4' sx={{fontWeight:'medium', letterSpacing: -2, paddingBottom:'10px', paddingTop:'10px'}}>Gnosis Safe</Typography>
                         <Typography sx={{color:'#848281', fontWeight:'regular', fontSize: '16px', paddingBottom:'10px'}}>Copy the link and import into your Safe wallet</Typography>
-                        <ConnectWallets />
+                        <ConnectWallet />
                       </Box>
                     </Grid>
 
@@ -122,7 +126,7 @@ function App() {
                         <AccountBalanceWalletOutlinedIcon fill='black' sx={{marginTop:'25px', width: '35px', height: '35px'}} />
                         <Typography variant='h4' sx={{fontWeight:'medium', letterSpacing: -2, paddingBottom:'10px', paddingTop:'10px'}}>Test Wallet </Typography>
                         <Typography sx={{color:'#848281', fontWeight:'regular', fontSize: '16px', paddingBottom:'10px'}}>Connect to see the test wallet flow</Typography>
-                        <ConnectWallets />
+                        <ConnectWallet />
                       </Box>
                     </Grid>
                   </Grid>
@@ -138,7 +142,7 @@ function App() {
               ) : (
 
                 /* RECOVERY FLOW! */
-                <Box sx={{height:'340px', width:'800px', marginX: 'auto', background:'#FFFFFF', border:'1px solid #DDDDDD', borderRadius:'18px', marginY:'25px', paddingY: '20px', paddingX: '50px', position:'relative'}}>
+                <Box sx={{height:'310px', width:'800px', marginX: 'auto', background:'#FFFFFF', border:'1px solid #DDDDDD', borderRadius:'18px', marginY:'25px', paddingY: '20px', paddingX: '50px', position:'relative'}}>
                   <Box sx={{ position: 'absolute', top: '10px', right: '12px'}}>
                     <MoreInfoDialog
                       title='Recover Your Lost Recovery Enabled Wallet' 
@@ -156,7 +160,7 @@ function App() {
                     </Grid>
                   </Grid>
 
-                  <Stack  sx={{ marginTop: '40px', width:'270px', marginX: 'auto'}}>
+                  <Stack  sx={{ marginTop: '30px', width:'270px', marginX: 'auto'}}>
                     <Button>Request Wallet Transfer</Button>
                   </Stack>
 
@@ -167,19 +171,32 @@ function App() {
               )}
             </div>
 
+
+
+
+
+
+
             {/* Temporarily moving components here for frontend redesign */}
             <Box sx={{marginTop:'200px'}}>
               <h2>Components below swapped based on switch (just for editing)</h2>
-              {renderBody()}
+              {/* {renderBody()} */}
 
               {/* <ConnectWallets /> */}
               {/* <SafeModuleRecovery/> */}
+              {/* setting up the guardians*/}
               {/* <RequestGuardian /> */}
-              {/* <RequestedRecoveries /> */}
+              {/* getting the responses status from guardians*/}
+              {/* <RequestGuardianStatus />  */}
+              {/* <WalletGuarded/> */}
+              
 
+             
+              {/* <RequestedRecoveries /> */}
+              <TriggerAccountRecoveryEmails/>
               {/* trigger recovery breaks  */}
               {/* <TriggerAccountRecovery/>  */}
-              <PerformRecovery/>
+              {/* <PerformRecovery/> */}
 
   {/*The STEPS are
     CONNECT_WALLETS: 0,

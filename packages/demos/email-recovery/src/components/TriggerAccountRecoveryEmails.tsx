@@ -19,13 +19,15 @@ import InputField from "./InputField";
 import InputNumber from "./InputNumber"; // Import the new component
 import StatusTag from "./StatusTag"
 import MoreInfoDialog from "./MoreInfoDialog";
+import CircleIcon from '@mui/icons-material/Circle';
+import Timer from './Timer'
 
 const isValidEmail = (email) => {
   const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return re.test(String(email).toLowerCase());
 };
 
-const RequestGuardian = () => {
+const TriggerAccountRecoveryEmails= () => {
   const theme = useTheme();
 
   const { address } = useAccount();
@@ -37,6 +39,7 @@ const RequestGuardian = () => {
   const [loading, setLoading] = useState(false);
   const [recoveryDelay, setRecoveryDelay] = useState(1);
   const [emailError, setEmailError] = useState(false);
+  const [numGuardiansAccepted, setNumGuardiansAccepted] = useState(0); // New state variable
 
   const isMobile = window.innerWidth < 768;
 
@@ -139,53 +142,75 @@ const RequestGuardian = () => {
 
   return (
     <Box sx={{ marginX: 'auto' }}>
-      <Typography variant='h2' sx={{ paddingBottom: '20px'}}>Set Up Guardian Details </Typography>
-      <Typography variant='h6' sx={{paddingBottom: '80px'}}>Choose 3 Guardians you trust to be enable wallet recovery <br></br> via email. They'll receive an email request.</Typography>
+      <Typography variant='h2' sx={{ paddingBottom: '20px'}}>Recover Your Wallet Today.</Typography>
+      <Typography variant='h6' sx={{paddingBottom: '80px'}}>Enter your guardians email addresses</Typography>
 
       <Grid container spacing={3} sx={{ maxWidth: isMobile ? "100%" : "60%", width: "100%", marginX: 'auto' }}>
 
         <Grid item xs={6} sx={{ borderRight: '1px solid #EBEBEB', paddingRight: '30px' }}>
           <Box display="flex" flexDirection="column" gap="1rem" sx={{ paddingRight: '5px' }}>
-            <Box display="flex" alignItems="center" justifyContent="space-between">
-              <Box display="flex" alignItems="center">
-                <Typography variant="body1" sx={{ marginRight: '25px' }}>Recovery Delay (seconds)</Typography>
-                <InputNumber
-                  value={recoveryDelay}
-                  onChange={(e) => setRecoveryDelay(Number(e.target.value))}
-                  min={1}
-                />
-              </Box>
-              <MoreInfoDialog
-                title='Recovery Delay'
-                message='This is the delay you the actual wallet owner has to cancel recovery after recovery has been initiated, helpful for preventing malicious behavior from guardians.'
-              />
-            </Box>
+
 
             <Box display="flex" flexDirection="column" gap="1rem" sx={{ textAlign: 'left' }}>
-              <Typography variant="body1">Connected wallet:</Typography>
-              <ConnectKitButton />
+              {/* <Typography variant="body1">Connected wallet:</Typography>
+              <Box display="flex" flexDirection="row" gap="1rem" sx={{ textAlign: 'left' }}>
+                <ConnectKitButton />
+                <StatusTag status="Guarded" />
+              </Box> */}
+
+              <Box borderRadius={3} width='100%' sx={{  marginX: 'auto', backgroundColor: '#FCFCFC', border: '1px solid #E3E3E3', paddingY:'20px', paddingX:'25px', position:'relative' }}>
+              <Box sx={{ position: 'absolute', top: '10px', right: '12px'}}>
+                <MoreInfoDialog
+                  title='Transfer Wallet Delay After Recovery is Triggered'
+                  message='Once all guardians have replyed to the recovery request email, you or anyone can trigger recovery, then this delay countdown will start which is how long you have to cancel recovery once it is triggered'
+                />
+              </Box>
+                <Box display="flex" flexDirection="column" gap="1rem" sx={{ textAlign: 'left' }}>
+                  <Box display="flex" flexDirection="column" gap="1rem" justifyItems='left' sx={{ textAlign: 'left' }}>
+                    <Typography variant="body1">Timer:</Typography>
+                      {/* TIMER COUNTDOWN DELAY*/}
+                      <Timer initialTime={300} /> {/* 5 minutes */}
+
+                  </Box>
+                  <Box display="flex" flexDirection="row" gap="1rem" sx={{ textAlign: 'left' }}>
+                    <Typography variant="body1">Lost Wallet:</Typography>
+                  </Box>
+                  <Box display="flex" flexDirection="row" gap="1rem" sx={{ textAlign: 'left' }}>
+                    <ConnectKitButton />
+                  </Box>
+                  <Box display="flex" flexDirection="row" gap="1rem" sx={{ textAlign: 'left' }}>
+                    <Typography variant="body1">Requested New Wallet Address:</Typography>
+                  </Box>
+                  <Box display="flex" flexDirection="row" gap="1rem" sx={{ textAlign: 'left' }}>
+                    <ConnectKitButton />
+                  </Box>
+                </Box>
+              </Box>
+
+
             </Box>
             <Box display="flex" alignItems="center" justifyContent="space-between" sx={{ textAlign: 'left' }}>
-              <Box flex="1" sx={{ marginRight: '25px' }}>
+              {/* <Box flex="1" sx={{ marginRight: '25px' }}>
                 <InputField
                   placeholderText='message'
                   type="text"
                   value={guardianEmail}
                   onChange={(e) => setGuardianEmail(e.target.value)}
-                  label="Add a Guardian Message"
-                  locked={false}
+                  label="Attached Email Guardian Message"
+                  locked={true}
                   {...(guardianEmail && {
                     status: emailError ? 'error' : 'okay',
                     statusNote: emailError ? 'Please enter the correct email address' : 'Okay'
                   })}
                 />
-              </Box>
-              <Box>
+              </Box> */}
+
+              {/* <Box>
                 <MoreInfoDialog
                   title='Guardian Message'
                   message='This message will get sent along in the email with our default instructions. This can be helpful later for your guardians to find the email that contains your lost wallet without having to remember the lost wallet address.'
                 />
-              </Box>
+              </Box> */}
             </Box>
 
           </Box>
@@ -203,25 +228,31 @@ const RequestGuardian = () => {
                   value={guardianEmail}
                   onChange={(e) => setGuardianEmail(e.target.value)}
                   label={`Guardian's Email`}
-                  locked={false}
-                  {...(guardianEmail && {
-                    status: emailError ? 'error' : 'okay',
-                    statusNote: emailError ? 'Please enter the correct email address' : 'Okay'
-                  })}
+                  locked={true}
+                  status='okay'        //change to 'okay' when guardian accepts
+                  statusNote= 'All Guardians have accepted the request!'  //change to 'A Guardian has accepted the request!' when guardian accepts
                 />
               ))}
             </Box>
           </Box>
         </Grid>
 
-        <Grid item xs={12} display="flex" justifyContent="center" sx={{marginTop:'30px'}}>
-          <Button loading={loading} onClick={configureRecoveryAndRequestGuardian}>
-            Configure Recovery & Request Guardian
-          </Button>
+        <Grid item xs={12} sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', marginTop: '30px' }}>
+          <Box width='300px' margin='auto'>
+            <Button>
+              Trigger Recovery
+            </Button>
+          </Box>
+          <Box width='300px' margin='auto' sx={{marginTop: '20px'}}>
+            <Button>
+              3/3 Complete Recovery
+            </Button>
+          </Box>
         </Grid>
+
       </Grid>
     </Box>
   );
 };
 
-export default RequestGuardian;
+export default TriggerAccountRecoveryEmails;

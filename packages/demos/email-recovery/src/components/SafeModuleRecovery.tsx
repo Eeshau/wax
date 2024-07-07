@@ -6,7 +6,8 @@ import { abi as safeAbi } from "../abi/Safe.json";
 import { useCallback, useContext, useEffect, useState } from "react";
 import { StepsContext } from "../App";
 import { STEPS } from "../constants";
-import {Box} from '@mui/material'
+import {Box, Typography} from '@mui/material'
+import CircleIcon from '@mui/icons-material/Circle';
 
 const SafeModuleRecovery = () => {
   const { address } = useAccount();
@@ -50,10 +51,19 @@ const SafeModuleRecovery = () => {
   }, [address, writeContractAsync]);
 
   return (
-    <div style={{ display: "flex", gap: "2rem", flexDirection: "column" }}>
-      <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
-        Connected wallet: <ConnectKitButton />
-      </div>
+    <Box sx={{ marginX: 'auto' }}>
+    <Typography variant='h2' sx={{ paddingBottom: '10px'}}>Set Up Wallet Recovery</Typography>
+    <Typography variant='h6' sx={{paddingBottom: '80px'}}>Connect your wallet now to make your wallet <br></br>recoverable by guardian.</Typography>
+    <div style={{ display: "flex", gap: "2rem", flexDirection: "column"}}>
+
+
+      <Box borderRadius={3} sx={{  marginX: 'auto', backgroundColor: '#FCFCFC', border: '1px solid #E3E3E3', paddingY:'20px', paddingX:'25px' }}>
+        <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
+          <CircleIcon sx={{padding:'5px', color: '#6DD88B', marginRight:'-10px'}}/>
+          Connected wallet: <ConnectKitButton />
+        </div>
+      </Box>
+
       {!isModuleEnabled ? (
         <Box sx={{marginX: 'auto', width: '500px'}}>
           <Button disabled={loading} onClick={enableEmailRecoveryModule}>
@@ -63,6 +73,7 @@ const SafeModuleRecovery = () => {
 
       ) : null}
     </div>
+    </Box>
   );
 };
 

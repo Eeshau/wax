@@ -13,7 +13,7 @@ import Box from '@mui/material/Box';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import { Web3Provider } from "../providers/Web3Provider";
 import { ConnectKitButton } from "connectkit";
-
+import {Link} from 'react-router-dom'
 
 
 const NavBar: React.FC = () => {
@@ -41,12 +41,14 @@ const NavBar: React.FC = () => {
                     <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
                         <MailOutlineIcon  style={{ fill: '#000000' }}/>
                         {/* <img src="path_to_logo" alt="Logo" style={{ marginRight: theme.spacing(2) }} /> */}
-                        <Typography variant="h6" color="black">ZKEmail</Typography>
+                        <Link  to='https://prove.email/' target='_blank'>
+                            <Typography variant="h6" color="black">ZKEmail</Typography>
+                        </Link>
                     </Box>
                   </Grid>
                   <Grid item xs={6} sx={{borderRight:'0.5px solid black', paddingLeft:'25px', paddingY:'10px'}}>
                       <Box sx={{ display: 'flex', alignItems: 'center',  }}>
-                        <Button color='primary' href='https://prove.email/' sx={{marginRight: theme.spacing(2), textTransform:'none'}}>Home</Button>
+                        <Button color='primary' href='/' sx={{marginRight: theme.spacing(2), textTransform:'none'}}>Home</Button>
                         <Button color="primary" href='https://prove.email/blog' target='_blank' sx={{marginRight: theme.spacing(2), textTransform:'none' }}>Blog</Button>
                         <Button color="primary" href='https://zkemail.gitbook.io/zk-email' target='_blank'sx={{ marginRight: theme.spacing(2), textTransform:'none' }}>Docs</Button>
                         <Button color="primary" href='https://prove.email/projects' target='_blank' sx={{ marginRight: theme.spacing(2), textTransform:'none' }}>Demos</Button>

@@ -131,6 +131,7 @@ const RequestedRecoveries = () => {
     <div
       style={{
         maxWidth: isMobile ? "100%" : "50%",
+        margin: 'auto',
         width: "100%",
         display: "flex",
         flexDirection: "column",
@@ -176,6 +177,7 @@ const RequestedRecoveries = () => {
             flexDirection: "column",
             gap: "1rem",
             width: "100%",
+            textAlign: 'left',
           }}
         >
           Requested Recoveries:
@@ -195,6 +197,7 @@ const RequestedRecoveries = () => {
                   display: "flex",
                   flexDirection: "column",
                   width: isMobile ? "90%" : "45%",
+                  textAlign: 'left',
                 }}
               >
                 <p>Guardian's Email</p>
@@ -210,6 +213,7 @@ const RequestedRecoveries = () => {
                   display: "flex",
                   flexDirection: "column",
                   width: isMobile ? "90%" : "45%",
+                  textAlign: 'left',
                 }}
               >
                 <p>Requested New Wallet Address</p>

@@ -53,9 +53,9 @@ import { useAccount } from "wagmi";
 import { useContext } from "react";
 import { StepsContext } from "../App";
 import { STEPS } from "../constants";
-import { Typography, Box } from "@mui/material";
+import { Typography } from "@mui/material";
 
-const ConnectWallets = () => {
+const ConnectWallet = () => {
   const { address } = useAccount();
   const stepsContext = useContext(StepsContext);
 
@@ -67,9 +67,8 @@ const ConnectWallets = () => {
   return (
     <div className="connect-wallets-container">
 
-      <Box sx={{ marginX: 'auto' }}>
-      <Typography variant='h2' sx={{ paddingBottom: '20px'}}>Set Up Wallet Recovery</Typography>
-      <Typography variant='h6' sx={{paddingBottom: '80px'}}>Connect your wallet now to make your wallet <br></br>recoverable by guardian.</Typography>
+      
+      <Typography></Typography>
       {/* <Button endIcon={<img src={walletIcon} />}>Connect Genosis Safe</Button>
 
       <p color="#CECFD2" style={{ display: "flex", gap: "0.5rem" }}>
@@ -88,9 +87,8 @@ const ConnectWallets = () => {
       {/* <p style={{ textDecoration: "underline" }}>
         Or, recover existing wallet instead ➔
       </p> */}
-      </Box>
     </div>
   );
 };
 
-export default ConnectWallets;
+export default ConnectWallet;

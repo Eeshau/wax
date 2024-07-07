@@ -25,7 +25,7 @@ const isValidEmail = (email) => {
   return re.test(String(email).toLowerCase());
 };
 
-const RequestGuardian = () => {
+const RequestGuardianStatus = () => {
   const theme = useTheme();
 
   const { address } = useAccount();
@@ -37,6 +37,7 @@ const RequestGuardian = () => {
   const [loading, setLoading] = useState(false);
   const [recoveryDelay, setRecoveryDelay] = useState(1);
   const [emailError, setEmailError] = useState(false);
+  const [numGuardiansAccepted, setNumGuardiansAccepted] = useState(0); // New state variable
 
   const isMobile = window.innerWidth < 768;
 
@@ -139,12 +140,12 @@ const RequestGuardian = () => {
 
   return (
     <Box sx={{ marginX: 'auto' }}>
-      <Typography variant='h2' sx={{ paddingBottom: '20px'}}>Set Up Guardian Details </Typography>
-      <Typography variant='h6' sx={{paddingBottom: '80px'}}>Choose 3 Guardians you trust to be enable wallet recovery <br></br> via email. They'll receive an email request.</Typography>
+      <Typography variant='h2' sx={{ paddingBottom: '20px'}}>Requests Sent to Guardians </Typography>
+      <Typography variant='h6' sx={{paddingBottom: '80px'}}>Notify your choosen 3 Guardians to reply 'Confirm' to the request email <br></br> to confirm their gaurdianship</Typography>
 
       <Grid container spacing={3} sx={{ maxWidth: isMobile ? "100%" : "60%", width: "100%", marginX: 'auto' }}>
 
-        <Grid item xs={6} sx={{ borderRight: '1px solid #EBEBEB', paddingRight: '30px' }}>
+        <Grid item xs={6} sx={{ borderRight: '3px solid #EBEBEB', paddingRight: '30px' }}>
           <Box display="flex" flexDirection="column" gap="1rem" sx={{ paddingRight: '5px' }}>
             <Box display="flex" alignItems="center" justifyContent="space-between">
               <Box display="flex" alignItems="center">
@@ -173,7 +174,7 @@ const RequestGuardian = () => {
                   value={guardianEmail}
                   onChange={(e) => setGuardianEmail(e.target.value)}
                   label="Add a Guardian Message"
-                  locked={false}
+                  locked={true}
                   {...(guardianEmail && {
                     status: emailError ? 'error' : 'okay',
                     statusNote: emailError ? 'Please enter the correct email address' : 'Okay'
@@ -203,11 +204,9 @@ const RequestGuardian = () => {
                   value={guardianEmail}
                   onChange={(e) => setGuardianEmail(e.target.value)}
                   label={`Guardian's Email`}
-                  locked={false}
-                  {...(guardianEmail && {
-                    status: emailError ? 'error' : 'okay',
-                    statusNote: emailError ? 'Please enter the correct email address' : 'Okay'
-                  })}
+                  locked={true}
+                  status='waiting'        //change to 'okay' when guardian accepts
+                  statusNote= 'Waiting for response'  //change to 'A Guardian has accepted the request!' when guardian accepts
                 />
               ))}
             </Box>
@@ -216,12 +215,16 @@ const RequestGuardian = () => {
 
         <Grid item xs={12} display="flex" justifyContent="center" sx={{marginTop:'30px'}}>
           <Button loading={loading} onClick={configureRecoveryAndRequestGuardian}>
-            Configure Recovery & Request Guardian
+              {`${numGuardiansAccepted}/3 Guardians accepted request`}
           </Button>
         </Grid>
       </Grid>
+
+      <StatusTag status="Guarded" />
+      <StatusTag status="Recovered" />
+
     </Box>
   );
 };
 
-export default RequestGuardian;
+export default RequestGuardianStatus;

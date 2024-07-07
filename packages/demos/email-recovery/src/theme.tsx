@@ -22,7 +22,21 @@ const theme = createTheme({
       fontSize: '5rem', // Default font size for the smallest screens (xs)
       letterSpacing: -2,
       fontWeight: '400'
+    },
+    h2: {
+       fontWeight: '700', 
+       color: '#333741',
+       letterSpacing: -1,
+    },
+
+    h6: {
+      // fontFamily: berkeleyOldStyle.style.fontFamily, // Use Berkeley Old Style for h1
+      color: '#8E8E8E',
+      fontSize: '20px', // Default font size for the smallest screens (xs)
+      fontWeight: '500',
+      lineHeight: '140%',
     }
+    
   },
 
   components: {

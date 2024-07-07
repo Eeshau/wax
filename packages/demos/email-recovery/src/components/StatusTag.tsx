@@ -10,7 +10,7 @@ type StatusTagProps = {
 const StatusTag: React.FC<StatusTagProps> = ({ status }) => {
   const isGuarded = status === 'Guarded';
 
-  const icon = isGuarded ? <SecurityIcon sx={{padding:'4px'}}/> : <MonetizationOnIcon sx={{padding:'4px'}}/>;
+  const icon = isGuarded ? <SecurityIcon sx={{padding:'6px'}}/> : <MonetizationOnIcon sx={{padding:'6px'}}/>;
   const color = isGuarded ? '#0069E4' : '#FFAC30';
   const backgroundColor = isGuarded ? '#EFF8FF' : '#4E1D09';
   const borderColor = isGuarded ? '#B2DDFF' : '#93370D';
@@ -18,11 +18,10 @@ const StatusTag: React.FC<StatusTagProps> = ({ status }) => {
   return (
     <Box
       sx={{
-        width:'150px',
         display: 'flex',
         alignItems: 'center',
-        padding: '4px 12px 4px 5px',
-        gap: '4px',
+        padding: '0px 10px 0px 2px',
+        gap: '0px',
         borderRadius: '9999px',
         border: `2px solid ${borderColor}`,
         backgroundColor: backgroundColor,
@@ -30,10 +29,10 @@ const StatusTag: React.FC<StatusTagProps> = ({ status }) => {
         justifyContent: 'center'
       }}
     >
-      <Box sx={{ display: 'flex', alignItems: 'center', color: color, paddingX:'5px' }}>
+      <Box sx={{ display: 'flex', alignItems: 'center', color: color, paddingX:'0px' }}>
         {icon}
       </Box>
-      <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
+      <Typography variant="body1" sx={{ fontWeight: 'bold', fontSize:'10px'}}>
         {status}
       </Typography>
     </Box>
